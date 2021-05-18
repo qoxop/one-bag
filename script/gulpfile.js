@@ -86,10 +86,10 @@ async function CompileQs(cb) {
   const bundle = await rollup.rollup({
     input: require.resolve('qs'),
     plugins: [
+      commonjs(),
       rResolve({
         preferBuiltins: false,
       }),
-      commonjs(),
       terser(),
     ]
   });
@@ -141,7 +141,6 @@ async function compileMain(cb) {
           compilerOptions: {
             declaration: true,
           },
-          // declarationDir: './dest',
         },
         check: false
       }),

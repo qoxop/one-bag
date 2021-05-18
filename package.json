@@ -7,7 +7,11 @@
   "scripts": {
     "build": "npx gulp --gulpfile script/gulpfile.js"
   },
-  "files": ["dist", "libs", "bin"],
+  "files": [
+    "dist",
+    "libs",
+    "bin"
+  ],
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "history": "^4.9.0",
@@ -28,6 +32,8 @@
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0"
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.2.4",
+    "util": "^0.12.3"
   }
 }
