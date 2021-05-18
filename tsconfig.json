@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "module": "ES2015",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+    "lib": ["dom", "es2015", "ScriptHost"],
+    "target": "ES5",
+    "noEmit": true,
+    "typeRoots": ["node_modules/@types", "@types"],
+    "noImplicitAny": true,
+    "removeComments": true,
+    "moduleResolution": "Node",
+    "preserveConstEnums": true,
+    "sourceMap": false,
+    "allowSyntheticDefaultImports": true,
+  }
+}
