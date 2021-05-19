@@ -1,9 +1,12 @@
 {
-  "name": "react-foundation",
+  "name": "@qoxop/react-foundation",
   "version": "1.0.0",
   "main": "dist/index.js",
   "author": "张集伟 <zhangjw01@mingyuanyun.com>",
   "license": "MIT",
+  "publishConfig": {
+    "registry": "http://www.qoxop.run"
+  },
   "scripts": {
     "build": "npx gulp --gulpfile script/gulpfile.js"
   },

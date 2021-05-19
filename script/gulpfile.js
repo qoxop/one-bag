@@ -154,6 +154,7 @@ async function compileMain(cb) {
     format: 'esm',
     exports: 'named'
   })
+  importMap['@qoxop/react-foundation'] = `react-foundation@${version}.js`;
   cb();
 }
 function clear(cb) {
