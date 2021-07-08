@@ -1,34 +1,25 @@
-import React from 'react';
+/**
+ * redux 的初始化
+ */
 import { configureStore, combineReducers, Reducer } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
 
-const initReducers = {
-  version: () => '1.0.0',
-}
+type IReducers = Array<{ key: string; reducer: Reducer;}> | { key: string; reducer: Reducer }
 
 /** 动态插入的 reducer */
-const asyncReducers: {
-  [k: string]: Reducer;
-} = {};
-
-/** redux store */
-const store = configureStore({
-  reducer: combineReducers(initReducers),
-});
-
-type IDispatch = typeof store.dispatch;
+const asyncReducers: { [k: string]: Reducer } = {};
 
 /**
- * 用于异步加载的模块动态插入 reducer
+ * 创建 store 对象
+ */
+const store = configureStore({
+  reducer: combineReducers({}),
+});
+
+/**
+ * 用于异步加载的模块动态插入reducer
  * @param reducers
  */
-function mergeReducer(reducers: Array<{
-  key: string;
-  reducer: Reducer;
-}> | {
-  key: string;
-  reducer: Reducer;
-}): void {
+export function mergeReducer(reducers: IReducers): void {
   let hasNew = false;
   if (reducers instanceof Array) {
     reducers.forEach((item) => {
@@ -48,21 +39,9 @@ function mergeReducer(reducers: Array<{
   }
   if (hasNew) {
     store.replaceReducer(combineReducers({
-      ...initReducers,
       ...asyncReducers,
     }));
   }
 }
 
-function ReduxProvider(props: { children: any}) {
-  return <Provider store={store}>{props.children}</Provider>
-}
-
-export {
-  store,
-  mergeReducer,
-  ReduxProvider,
-  IDispatch,
-};
-
-
+export default store;

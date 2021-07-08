@@ -7,11 +7,12 @@
     "target": "ES5",
     "noEmit": true,
     "typeRoots": ["node_modules/@types", "@types"],
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "removeComments": true,
     "moduleResolution": "Node",
     "preserveConstEnums": true,
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
+    "suppressImplicitAnyIndexErrors": true,
   }
 }

@@ -1,16 +1,22 @@
-import { RouteComponentProps, StaticContext } from "react-router";
-import { Reducer } from "redux";
+import { RouteComponentProps, StaticContext } from 'react-router';
+import * as H from 'history';
 
-export type UIComponent = React.ComponentType<RouteComponentProps<any, StaticContext, unknown>> | React.ComponentType<any>;
+export type IRouteProps = {
+    key?:string;
+    path?:string | string[];
+    component:React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+    routes?:IRouteProps[] | (() => Promise<IRouteProps[]>);
+    location?:H.Location;
+    exact?:boolean;
+    sensitive?:boolean;
+    strict?:boolean;
+    breadcrumbs?:string[];
+};
 
-export type StandardModule = (metadata: {
-  pathkey:string;
-  storage: {
-    local: any;
-    session: any;
-  },
-  base?:string; // 父级路径
-}) => {
-  Component: UIComponent;
-  reducer?: Reducer;
+export interface IRouteComponentProps<
+    Params extends { [K in keyof Params]?:string } = unknown,
+    C extends StaticContext = StaticContext,
+    S = H.LocationState
+> extends RouteComponentProps<Params, C, S> {
+    route:IRouteProps;
 }
