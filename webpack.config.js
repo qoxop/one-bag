@@ -32,8 +32,7 @@ module.exports = {
   output: {
     chunkFilename: "[name].[contenthash].js",
     path: path.resolve(__dirname, './dist'),
-    // publicPath: 'http://localhost:5000/',
-    // clean: true,
+    clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -95,11 +94,11 @@ module.exports = {
   },
   plugins: [
     new AntdDayjsWebpackPlugin(),
-    // new MiniCssExtractPlugin({
-    //   filename: '[name].[fullhash].css',
-    //   chunkFilename: '[id].[fullhash].css',
-    //   ignoreOrder: true
-    // }),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: true
+    }),
     new ModuleFederationPlugin({
       name: "react-combo",
       shared: SystemRegisterLoader.parseDeps(SystemOptions).asyncDeps,
