@@ -24,10 +24,16 @@ interface IRouter {
   goBack(): void,
   goForward(): void,
   go(n: number): void;
+  history: History,
 }
 
 let history:History = null;
 
+/**
+ * 代理对象高级函数
+ * @param name
+ * @returns 
+ */
 function methodHoc(name:string) {
   return {
     get() {
@@ -42,6 +48,9 @@ function methodHoc(name:string) {
   }
 }
 
+/**
+ * 代理 router，用于检查 histroy 是否在最开始进行了初始化
+ */
 const router: IRouter = Object.defineProperties({} as any, {
   push: methodHoc('push'),
   replace: methodHoc('replace'),
@@ -62,7 +71,13 @@ const router: IRouter = Object.defineProperties({} as any, {
   }
 });
 
-
+/**
+ * 合并新旧 query 对象，将某些参数固定
+ * @param oldSearch 
+ * @param newQuery 
+ * @param fixQuerys 
+ * @returns 
+ */
 function getQuery(oldSearch:string, newQuery: any, fixQuerys: string[] = []) {
   const oldQuery = qs.parse(oldSearch, { ignoreQueryPrefix: true });
   return  {
@@ -76,6 +91,11 @@ function getQuery(oldSearch:string, newQuery: any, fixQuerys: string[] = []) {
   }
 }
 
+/**
+ * 创建 history 单例对象
+ * @param config 
+ * @returns 
+ */
 function createHistory(config: IRouterConfig) {
   if (history) {
     return history;

@@ -1,0 +1,15 @@
+{
+  "presets": [
+      [
+          "@babel/preset-env",
+          {
+              "useBuiltIns": "usage",
+              "spec": true,
+              "loose": false,
+              "corejs": 3
+          }
+      ],
+      "@babel/preset-react",
+      ["@babel/preset-typescript", {"allowNamespaces": true}]
+  ]
+}

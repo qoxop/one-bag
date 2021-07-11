@@ -1,13 +1,14 @@
-import './src/lib.register';
+import './lib.register';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import { renderRoutes } from 'react-router-config';
-import store, { mergeReducer } from './src/store';
-import { IRouteProps } from './src/types';
-import { moduleLoader } from './src/loader'
-import { createHistory, router, IRouterConfig } from './src/route';
+import store, { mergeReducer } from './helpers/store';
+import { IRouteProps } from './helpers/types';
+import { moduleLoader } from './helpers/loader'
+import { createHistory, router, IRouterConfig } from './helpers/route';
+import 'antd/dist/antd.less';
 
 interface IConfig {
   mounted?: string,
