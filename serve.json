@@ -1,0 +1,14 @@
+{
+  "headers": [
+    {
+      "source" : "**/*.*",
+      "headers" : [{
+        "key" : "Cache-Control",
+        "value" : "max-age=7200"
+      }, {
+        "key": "Access-Control-Allow-Origin",
+        "value": "*"
+      }]
+    }
+  ]
+}

@@ -10,8 +10,7 @@ function countPeerDeps(mPackageJson) {
     }
     return pre;
   }, []);
-  console.log(mDeps, libDeps)
-  return mDeps.filter(md => libDeps.includes(md)).concat('systemjs');
+  return mDeps.filter(md => libDeps.includes(md)).concat(['systemjs', '@qoxop/react-combo']);
 }
 
 module.exports = {

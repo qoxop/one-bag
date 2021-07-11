@@ -32,12 +32,8 @@ module.exports = {
   output: {
     chunkFilename: "[name].[contenthash].js",
     path: path.resolve(__dirname, './dist'),
-    library: {
-      name: 'react-combo',
-      type: 'system',
-    },
-    libraryTarget: 'system',
-    clean: true,
+    // publicPath: 'http://localhost:5000/',
+    // clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
@@ -57,7 +53,7 @@ module.exports = {
         }
       },
       {
-        resource: path.resolve(__dirname, './src/lib.register.ts'),
+        resource: path.resolve(__dirname, './src/system.register.ts'),
         use: {
           loader: SystemRegisterLoader.loaderPath,
           options: SystemOptions,
@@ -99,18 +95,18 @@ module.exports = {
   },
   plugins: [
     new AntdDayjsWebpackPlugin(),
-    new MiniCssExtractPlugin({
-      filename: '[name].[fullhash].css',
-      chunkFilename: '[id].[fullhash].css',
-      ignoreOrder: true
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: '[name].[fullhash].css',
+    //   chunkFilename: '[id].[fullhash].css',
+    //   ignoreOrder: true
+    // }),
     new ModuleFederationPlugin({
       name: "react-combo",
       shared: SystemRegisterLoader.parseDeps(SystemOptions).asyncDeps,
     }),
   ],
   optimization: {
-    minimize: true,
+    minimize: false,
     minimizer: [
       new CssMinimizerPlugin(),
       new TerserPlugin({

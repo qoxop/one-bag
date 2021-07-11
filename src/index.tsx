@@ -1,4 +1,4 @@
-import './lib.register';
+import { register } from './system.register';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,7 +7,7 @@ import { renderRoutes } from 'react-router-config';
 import store, { mergeReducer } from './helpers/store';
 import { IRouteProps } from './helpers/types';
 import { moduleLoader } from './helpers/loader'
-import { createHistory, router, IRouterConfig } from './helpers/route';
+import { createHistory, router, IRouterConfig, getQuery, useQuery } from './helpers/route';
 import 'antd/dist/antd.less';
 
 interface IConfig {
@@ -36,11 +36,27 @@ const bootstrap = (config: IConfig):void => {
   );
 };
 
+// 注册模块
+register({
+  name: '@qoxop/react-combo',
+  value: {
+    default: bootstrap,
+    store,
+    router,
+    getQuery,
+    useQuery,
+    mergeReducer,
+    moduleLoader,
+  }
+});
+
 export {
   store,
-  router,
-  mergeReducer,
-  moduleLoader,
+    router,
+    getQuery,
+    useQuery,
+    mergeReducer,
+    moduleLoader
 }
 
 export default bootstrap

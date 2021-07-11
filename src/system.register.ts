@@ -4,7 +4,7 @@
  * 需要借助一个特殊的 webpack loader 将 moduleMap 的内容进行填充
  */
 
-if (window['_metadata']?.webpackPublicPath) {
+if (window['$_metadata']?.webpackPublicPath) {
   // @ts-ignore 设置 webpack public path
   __webpack_public_path__ = window['_metadata'].webpackPublicPath;
 }
@@ -47,4 +47,13 @@ System.constructor.prototype.instantiate = function (url:string, firstParentUrl:
     });
   }
   return instantiate.call(this, url, firstParentUrl)
+}
+/**
+ * 模块注册器
+ * @param module
+ */
+export const register = (module: {name: string, value: { default?: any, [key: string]: any }}) => {
+  if (!moduleMap[module.name]) {
+    moduleMap[module.name] = module.value;
+  }
 }

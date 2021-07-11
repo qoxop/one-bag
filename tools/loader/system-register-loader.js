@@ -3,6 +3,12 @@ const path = require('path');
 
 let flag = false;
 
+let index = 1;
+function newName() {
+  index++;
+  return `_dym__${index}`
+}
+
 function parseDeps(options = {}) {
   const packageJson = options.packageJson || require(path.resolve(process.cwd(), './package.json'));
   const dependenceConfig = packageJson.dependenceConfig || {};
@@ -25,11 +31,23 @@ function parseDeps(options = {}) {
 
 module.exports = function loader(source) {
   const options = getOptions(this) || {};
+  const insertHeader = [];
   if (flag === false) {
     const { templateStr = `/*! Module-Map-Replace */` } = options;
     const { asyncDeps, syncDeps } = parseDeps(options);
-    const syncCode = syncDeps.map(name => `'${name}': require("${name}")`).join(' ,');
+
+    // 插入同步模块
+    const syncCode = syncDeps.map(name => {
+      const mName = newName();
+      insertHeader.push(`import * as ${mName} from '${name}';`);
+      return `'${name}': ${mName}`;
+    }).join(' ,');
+
+    // 插入异步模块
     const asyncCode = asyncDeps.map(name => `'${name}': () => import("${name}")`).join(' ,');
+
+    // 更新源码
+    source = insertHeader.join('\n') + '\n' + source;
     source = source.replace(templateStr, [syncCode, asyncCode].filter(item => !!item).join(' ,'));
     flag = true;
   }

@@ -3,6 +3,7 @@
  */
 import { BrowserHistoryBuildOptions, createBrowserHistory, createHashHistory, HashHistoryBuildOptions, History  } from 'history';
 import qs from 'qs';
+import { useLocation } from 'react-router';
 
 type ILocation = {
   pathname:string;
@@ -78,9 +79,9 @@ const router: IRouter = Object.defineProperties({} as any, {
  * @param fixQuerys 
  * @returns 
  */
-function getQuery(oldSearch:string, newQuery: any, fixQuerys: string[] = []) {
+function newQuery(oldSearch:string, newQuery: any, fixQuerys: string[] = []) {
   const oldQuery = qs.parse(oldSearch, { ignoreQueryPrefix: true });
-  return  {
+  return qs.stringify({
     ...fixQuerys.reduce((pre, cur) => { // 将某些参数固定在 url 上
       if (typeof oldQuery[cur] !== 'undefined') {
         pre[cur] = oldQuery[cur];
@@ -88,7 +89,7 @@ function getQuery(oldSearch:string, newQuery: any, fixQuerys: string[] = []) {
       return pre;
     }, {}),
     ...newQuery,
-  }
+  })
 }
 
 /**
@@ -101,27 +102,38 @@ function createHistory(config: IRouterConfig) {
     return history;
   }
   const { type, fixQuerys, enhancer, options = {}} = config;
-  let _history = type === 'hash' ? createHashHistory(options) : createBrowserHistory(options);
+  history = type === 'hash' ? createHashHistory(options) : createBrowserHistory(options);
   if (typeof enhancer === 'function') {
-    _history = enhancer(history);
+    history = enhancer(history);
   } else  {
-    _history = Object.assign(Object.create(_history), {
+    const oldHistory = history;
+    const push = oldHistory.push.bind(oldHistory);
+    const replace = oldHistory.replace.bind(oldHistory);
+    history = Object.assign(Object.create(oldHistory), {
       push(location: ILocation):void {
         const { pathname, query = {}, state } = location;
-        _history.push({ pathname, state, search: `?${getQuery(_history.location.search, query, fixQuerys)}` });
+        push({ pathname, state, search: `?${newQuery(oldHistory.location.search, query, fixQuerys)}` });
       },
       replace(location: ILocation):void {
         const { pathname, query = {}, state } = location;
-        _history.replace({  pathname, state, search: `?${getQuery(_history.location.search, query, fixQuerys)}` });
+        replace({  pathname, state, search: `?${newQuery(oldHistory.location.search, query, fixQuerys)}` });
       }
     });
   }
-  history = _history;
   return history;
+}
+function useQuery() {
+  const location = useLocation();
+  return qs.parse(location.search, { ignoreQueryPrefix: true });
+}
+function getQuery() {
+  return qs.parse(history.location.search, { ignoreQueryPrefix: true })
 }
 
 export {
   router,
+  useQuery,
+  getQuery,
   createHistory,
   IRouterConfig
 };
