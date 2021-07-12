@@ -9,7 +9,8 @@ Object.assign(webpackConfig, {
     aggregateTimeout: 300,
     poll: 1000,
     ignored: /node_modules/,
-  }
+  },
+  // optimization: { ...webpackConfig.optimization, minimize: false }
 });
 
 const app = express();

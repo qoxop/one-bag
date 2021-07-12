@@ -24,7 +24,8 @@
     "react-redux": "^7.2.4",
     "react-router": "^5.2.0",
     "react-router-config": "^5.1.1",
-    "redux": "^4.1.0"
+    "redux": "^4.1.0",
+    "systemjs": "^6.10.2"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
@@ -34,7 +35,6 @@
     "@types/history": "^4.7.9",
     "@types/qs": "^6.9.6",
     "@types/react-router": "^5.1.16",
-    "@types/systemjs": "^6.1.0",
     "antd-dayjs-webpack-plugin": "^1.0.6",
     "autoprefixer": "^10.3.0",
     "babel-loader": "^8.2.2",

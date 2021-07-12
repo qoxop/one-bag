@@ -11,9 +11,9 @@ function newName() {
 
 function parseDeps(options = {}) {
   const packageJson = options.packageJson || require(path.resolve(process.cwd(), './package.json'));
+  const { syncs = [], ignores = []} = options;
   const dependenceConfig = packageJson.dependenceConfig || {};
-  const dependenciesName = Object.keys(packageJson.dependencies).filter(n => !/^@types\//.test(n));
-  const { syncs = []} = options;
+  const dependenciesName = Object.keys(packageJson.dependencies).filter(n => !/^@types\//.test(n)).filter(n => !ignores.includes(n));
   let syncDeps = [];
   let asyncDeps = [];
   dependenciesName.forEach(name => {

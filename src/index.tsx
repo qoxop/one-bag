@@ -1,3 +1,5 @@
+
+import 'systemjs/dist/system.min.js';
 import { register } from './system.register';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,7 +10,7 @@ import store, { mergeReducer } from './helpers/store';
 import { IRouteProps } from './helpers/types';
 import { moduleLoader } from './helpers/loader'
 import { createHistory, router, IRouterConfig, getQuery, useQuery } from './helpers/route';
-import 'antd/dist/antd.less';
+import '../assets/styles/index.less';
 
 interface IConfig {
   mounted?: string,

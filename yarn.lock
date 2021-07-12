@@ -1143,11 +1143,6 @@
   resolved "https://registry.nlark.com/@types/scheduler/download/@types/scheduler-0.16.1.tgz?cache=0&sync_timestamp=1621242658440&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40types%2Fscheduler%2Fdownload%2F%40types%2Fscheduler-0.16.1.tgz#18845205e86ff0038517aab7a18a62a6b9f71275"
   integrity sha1-GIRSBehv8AOFF6q3oYpiprn3EnU=
 
-"@types/systemjs@^6.1.0":
-  version "6.1.0"
-  resolved "https://registry.nlark.com/@types/systemjs/download/@types/systemjs-6.1.0.tgz#eb92e3181391b6f49b8310077fe65bfa3db9392a"
-  integrity sha1-65LjGBORtvSbgxAHf+Zb+j25OSo=
-
 "@webassemblyjs/ast@1.11.1":
   version "1.11.1"
   resolved "https://registry.nlark.com/@webassemblyjs/ast/download/@webassemblyjs/ast-1.11.1.tgz?cache=0&sync_timestamp=1625473459015&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40webassemblyjs%2Fast%2Fdownload%2F%40webassemblyjs%2Fast-1.11.1.tgz#2bfd767eae1a6996f432ff7e8d7fc75679c0b6a7"
@@ -6125,6 +6120,11 @@ svgo@^2.3.0:
     css-tree "^1.1.2"
     csso "^4.2.0"
     stable "^0.1.8"
+
+systemjs@^6.10.2:
+  version "6.10.2"
+  resolved "https://registry.nlark.com/systemjs/download/systemjs-6.10.2.tgz?cache=0&sync_timestamp=1625359392423&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsystemjs%2Fdownload%2Fsystemjs-6.10.2.tgz#c9870217bddf9cfd25d12d4fcd1989541ef1207c"
+  integrity sha1-yYcCF73fnP0l0S1PzRmJVB7xIHw=
 
 tapable@^2.1.1, tapable@^2.2.0:
   version "2.2.0"

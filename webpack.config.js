@@ -20,7 +20,8 @@ const SystemOptions = {
     '@reduxjs/toolkit',
     'history',
     'qs'
-  ]
+  ],
+  ignores: ['systemjs']
 }
 
 module.exports = {
@@ -40,6 +41,9 @@ module.exports = {
     symlinks: false,
   },
   module: {
+    noParse: function (content) {
+      return /system\.min\.js$/.test(content);
+    },
     rules: [
       {
         test: /\.(t|j)sx?$/,
@@ -105,7 +109,7 @@ module.exports = {
     }),
   ],
   optimization: {
-    minimize: false,
+    minimize: true,
     minimizer: [
       new CssMinimizerPlugin(),
       new TerserPlugin({
@@ -115,7 +119,6 @@ module.exports = {
           safari10: true,
         },
       }),
-     
     ]
   },
   cache: {
