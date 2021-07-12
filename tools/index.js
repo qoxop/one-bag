@@ -14,7 +14,7 @@ const { config, version } = packageJson;
   if (!/\/$/.test(basepath)) {
     basepath += '/';
   }
-  // head chunk
+  // head chunk 
   const linkCodes = `<link rel="stylesheet" href="${basepath}react-combo@${version}.css">`
   const metadata = JSON.stringify({
     version,
