@@ -5,7 +5,7 @@
   "author": "张集伟 <1106291186@qq.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./tools/server.js",
+    "dev": "node ./tools/devServer.js",
     "build": "webpack --config ./webpack.config.js"
   },
   "files": [
