@@ -6,6 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const SystemRegisterLoader = require('./tools/loader/system-register-loader');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const NpmImportPlugin = require("less-plugin-npm-import")
+const { version } = require('./package.json');
 
 const { ModuleFederationPlugin } = webpack.container;
 
@@ -31,6 +32,7 @@ module.exports = {
     'react-combo': path.resolve(__dirname, './src/index.tsx'),
   },
   output: {
+    filename: `[name]@${version}.js`,
     chunkFilename: "[name].[contenthash].js",
     path: path.resolve(__dirname, './dist'),
     clean: true,
@@ -99,7 +101,7 @@ module.exports = {
   plugins: [
     new AntdDayjsWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
+      filename: `[name]@${version}.css`,
       chunkFilename: '[id].css',
       ignoreOrder: true
     }),

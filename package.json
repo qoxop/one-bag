@@ -8,6 +8,11 @@
     "dev": "node ./tools/devServer.js",
     "build": "webpack --config ./webpack.config.js"
   },
+  "config": {
+    "devHost": "http://localhost",
+    "devPort": "3000",
+    "cdn": "http://localhost:3000/"
+  },
   "files": [
     "dist",
     "libs",

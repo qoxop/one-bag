@@ -4,9 +4,9 @@
  * 需要借助一个特殊的 webpack loader 将 moduleMap 的内容进行填充
  */
 
-if (window['$_metadata']?.webpackPublicPath) {
+if (window['$__combo_config']?.webpackPublicPath) {
   // @ts-ignore 设置 webpack public path
-  __webpack_public_path__ = window['_metadata'].webpackPublicPath;
+  __webpack_public_path__ = window['$__combo_config'].webpackPublicPath;
 }
 
 const moduleMap = {/*! Module-Map-Replace */};
