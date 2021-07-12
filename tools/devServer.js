@@ -10,7 +10,7 @@ Object.assign(webpackConfig, {
     poll: 1000,
     ignored: /node_modules/,
   },
-  // optimization: { ...webpackConfig.optimization, minimize: false }
+  optimization: { ...webpackConfig.optimization, minimize: false }
 });
 
 const app = express();

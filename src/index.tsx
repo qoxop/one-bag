@@ -10,7 +10,7 @@ import store, { mergeReducer } from './helpers/store';
 import { IRouteProps } from './helpers/types';
 import { moduleLoader } from './helpers/loader'
 import { createHistory, router, IRouterConfig, getQuery, useQuery } from './helpers/route';
-import '../assets/styles/index.less';
+import './assets/styles/index.less';
 
 interface IConfig {
   mounted?: string,
@@ -39,9 +39,8 @@ const bootstrap = (config: IConfig):void => {
 };
 
 // 注册模块
-register({
-  name: '@qoxop/react-combo',
-  value: {
+register.obj({
+  '@qoxop/react-combo': {
     default: bootstrap,
     store,
     router,
