@@ -3,10 +3,10 @@ const webpack = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const SystemRegisterLoader = require('./tools/loader/system-register-loader');
+const SystemRegisterLoader = require('./loader/system-register-loader');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const NpmImportPlugin = require("less-plugin-npm-import")
-const { version } = require('./package.json');
+const { version } = require('../package.json');
 
 const { ModuleFederationPlugin } = webpack.container;
 
@@ -29,12 +29,12 @@ module.exports = {
   mode: 'production',
   target: 'web',
   entry: {
-    'react-combo': path.resolve(__dirname, './src/index.tsx'),
+    'react-combo': path.resolve(__dirname, '../src/index.tsx'),
   },
   output: {
     filename: `[name]@${version}.js`,
     chunkFilename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, './dist'),
+    path: path.resolve(__dirname, '../dist'),
     clean: true,
   },
   resolve: {
@@ -58,7 +58,7 @@ module.exports = {
         }
       },
       {
-        resource: path.resolve(__dirname, './src/system.register.ts'),
+        resource: path.resolve(__dirname, '../src/system.register.ts'),
         use: {
           loader: SystemRegisterLoader.loaderPath,
           options: SystemOptions,
@@ -127,7 +127,7 @@ module.exports = {
     type: 'filesystem',
     allowCollectingMemory: true,
     buildDependencies: {
-      config: [__filename, path.resolve(__dirname, './package.json')],
+      config: [__filename, path.resolve(__dirname, '../package.json')],
     },
   },
 }
