@@ -1649,10 +1649,10 @@ atob@^2.1.2:
   resolved "https://registry.nlark.com/atob/download/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha1-bZUX654DDSQ2ZmZR6GvZ9vE1M8k=
 
-autoprefixer@^10.3.0:
-  version "10.3.0"
-  resolved "https://registry.nlark.com/autoprefixer/download/autoprefixer-10.3.0.tgz#c60803dce9268f7fe0a5e5c1fe48a74356d7b864"
-  integrity sha1-xggD3Okmj3/gpeXB/kinQ1bXuGQ=
+autoprefixer@^10.3.1:
+  version "10.3.1"
+  resolved "https://registry.nlark.com/autoprefixer/download/autoprefixer-10.3.1.tgz?cache=0&sync_timestamp=1626111096696&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fautoprefixer%2Fdownload%2Fautoprefixer-10.3.1.tgz#954214821d3aa06692406c6a0a9e9d401eafbed2"
+  integrity sha1-lUIUgh06oGaSQGxqCp6dQB6vvtI=
   dependencies:
     browserslist "^4.16.6"
     caniuse-lite "^1.0.30001243"
@@ -5399,6 +5399,15 @@ postcss@^8.2.15, postcss@^8.3.5:
   version "8.3.5"
   resolved "https://registry.nlark.com/postcss/download/postcss-8.3.5.tgz#982216b113412bc20a86289e91eb994952a5b709"
   integrity sha1-mCIWsRNBK8IKhiiekeuZSVKltwk=
+  dependencies:
+    colorette "^1.2.2"
+    nanoid "^3.1.23"
+    source-map-js "^0.6.2"
+
+postcss@^8.3.6:
+  version "8.3.6"
+  resolved "https://registry.nlark.com/postcss/download/postcss-8.3.6.tgz?cache=0&sync_timestamp=1626882933935&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.6.tgz#2730dd76a97969f37f53b9a6096197be311cc4ea"
+  integrity sha1-JzDddql5afN/U7mmCWGXvjEcxOo=
   dependencies:
     colorette "^1.2.2"
     nanoid "^3.1.23"

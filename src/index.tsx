@@ -10,7 +10,8 @@ import store, { mergeReducer } from './helpers/store';
 import { IRouteProps } from './helpers/types';
 import { moduleLoader } from './helpers/loader'
 import { createHistory, router, IRouterConfig, getQuery, useQuery } from './helpers/route';
-import './assets/styles/index.less';
+import 'antd/dist/antd.less';
+import Botton from 'antd/es/button'
 
 interface IConfig {
   mounted?: string,
@@ -20,7 +21,7 @@ interface IConfig {
 }
 
 const bootstrap = (config: IConfig):void => {
-  const { 
+  const {
     routes,
     AppContainer,
     routerConfig = {},
@@ -48,16 +49,18 @@ register.obj({
     useQuery,
     mergeReducer,
     moduleLoader,
+    register,
   }
 });
 
-export {
+export type {
   store,
-    router,
-    getQuery,
-    useQuery,
-    mergeReducer,
-    moduleLoader
+  router,
+  getQuery,
+  useQuery,
+  mergeReducer,
+  moduleLoader,
+  register
 }
 
-export default bootstrap
+export default bootstrap;

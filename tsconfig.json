@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "module": "ES2015",
+    "module": "es2020",
     "jsx": "react",
     "jsxFactory": "React.createElement",
     "lib": ["dom", "es2015", "ScriptHost"],
@@ -13,6 +13,6 @@
     "preserveConstEnums": true,
     "sourceMap": false,
     "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
+    "suppressImplicitAnyIndexErrors": true
   }
 }
