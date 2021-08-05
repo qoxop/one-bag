@@ -1,18 +1,20 @@
 /**
  * redux 的初始化
  */
-import { configureStore, combineReducers, Reducer } from '@reduxjs/toolkit';
+import {configureStore, combineReducers, Reducer, createSlice} from '@reduxjs/toolkit';
 
 type IReducers = Array<{ key: string; reducer: Reducer;}> | { key: string; reducer: Reducer }
 
 /** 动态插入的 reducer */
-const asyncReducers: { [k: string]: Reducer } = {};
+const asyncReducers: { [k: string]: Reducer } = {
+  version: () => '1.0.1'
+};
 
 /**
  * 创建 store 对象
  */
 const store = configureStore({
-  reducer: combineReducers({}),
+  reducer: combineReducers(asyncReducers),
 });
 
 /**

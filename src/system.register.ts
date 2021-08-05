@@ -3,8 +3,9 @@
  * 共享模块注册器
  * 需要借助一个特殊的 webpack loader 将 moduleMap 的内容进行填充
  */
+import 'systemjs/dist/system.min.js';
 
- type IObjModule = { default?: any, [key: string]: any }
+type IObjModule = { default?: any, [key: string]: any }
 
 if (window['$__combo_config']?.webpackPublicPath) {
   // @ts-ignore 设置 webpack public path
@@ -17,7 +18,7 @@ const importMaps: {[k:string]:string} = {};
 /**
  * 将一个模块变量注册成 systemjs 模块
  * @param m
- * @returns 
+ * @returns
  */
 function getVarRegister(m: any): any[] {
   return [ [], (_export:any) => ({ setters: [], execute: () => { _export(m) } }) ]
@@ -78,7 +79,7 @@ export const register = {
   },
   /**
    * 动态 importMap 更新
-   * @param urlModule 
+   * @param urlModule
    */
   url: (urlModule: {[k:string]:string}) => {
     Object.assign(importMaps, urlModule);

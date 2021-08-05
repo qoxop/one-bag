@@ -1,0 +1,79 @@
+.FlexRate(@cur, @total) when (@cur < @total) {
+  > .flex-@{cur}-@{total} {
+    flex-basis: (@cur / @total - 0.001) * 100%;
+    flex-shrink: 1;
+  }
+  .FlexRate(@cur + 1, @total);
+}
+
+.FlexItemMixin(@itemNum, @splitNum, @orderNum) {
+  > .flex-item {flex: 1;} // flex-item 与 flex-1 等价
+  > .no-shrink { flex-shrink: 0; }
+
+  each(range(@itemNum), {
+    > .flex-@{value} {
+      flex: @value;
+    }
+  });
+  each(range(@splitNum), {
+    .FlexRate(1, @value); // flex-1-2, flex-2-3
+  });
+  each(range(@orderNum), {
+    > .order-@{value} {
+      order: @value;
+    }
+  });
+}
+.NoBorder() {
+  .no-border { border: none !important; }
+  .no-right-border { border-right: none !important; }
+  .no-left-border { border-left: none !important; }
+  .no-top-border { border-top: none !important; }
+  .no-bottom-border { border-bottom: none !important; }
+}
+
+.Flexbox(@itemNum, @splitNum, @orderNum) {
+  .flexbox {
+    // 默认是垂直居中，靠左分布
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    .FlexItemMixin(@itemNum, @splitNum, @orderNum);
+    // 修改方向
+    &.f-column { flex-direction: column; height: 100%;}
+    &.f-reverse-column { flex-direction: column-reverse; height: 100%; }
+    &.f-reverse-row {flex-direction: row-reverse;}
+    // 修改 justify-content 属性， 项目在主轴方向上的对齐方式
+    &.f-end, &.f-right, &.f-bottom {
+      justify-content: flex-end;
+    }
+    &.f-center {
+      justify-content: center;
+    }
+    &.f-between {
+      justify-content: space-between;
+    }
+    &.f-around {
+      justify-content: space-around;
+    }
+    &.align-start, &.align-top, &.align-left {
+      align-items: flex-start;
+    }
+    &.align-end, &.align-bottom, &.align-right {
+      align-items: flex-end;
+    }
+    &.middle {
+      align-items: center;
+    }
+    &.baseline {
+      align-items: baseline;
+    }
+    &.f-wrap {
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.Flexbox(10,10,10);

@@ -1,8 +1,4 @@
-import { register } from '../../system.register';
+import 'antd/es/button/style/index.css';
+import Button from "antd/es/button";
 
-register.obj({
-    '@qoxop/react-combo/components/button': () => {
-        import('antd/lib/button/style/index.js');
-        return import('antd/lib/button');
-    }
-})
+export default Button;

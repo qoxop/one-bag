@@ -1,15 +1,20 @@
 const path = require('path');
-const webpackConfig = require('./webpack.config');
-const { config } = require('../package.json');
 const { merge } = require('webpack-merge');
+const { config } = require('./package.json');
+const webpackConfig = require('./webpack.config');
+
 
 module.exports = merge(webpackConfig, {
   mode: 'development',
   devtool: 'inline-source-map',
+  output: {
+    path: path.resolve(__dirname, './.website')
+  },
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    contentBase: path.resolve(__dirname, './.website'),
     port: config.devPort,
     host: '0.0.0.0',
+    writeToDisk: true,
     headers: {
       "Access-Control-Allow-Origin": "*"
     },

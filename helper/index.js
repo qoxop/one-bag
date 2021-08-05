@@ -7,24 +7,21 @@ const { config, version } = packageJson;
  * 获取 html 代码片段
  * @param {*} options
  */
- function getHtmlChunk(options = { isDev: false, basepath: config.cdn }) {
-  let { isDev = false, basepath = config.cdn } = options;
+ function getHtmlChunk(options = { isDev: false, publicPath: config.cdn }) {
+  let { isDev = false, publicPath = config.cdn } = options;
   if (isDev) {
-    basepath = `${config.devHost}:${config.devPort}/`;
+    publicPath = `${config.devHost}:${config.devPort}/`;
   }
-  if (!/\/$/.test(basepath)) {
-    basepath += '/';
+  if (!/\/$/.test(publicPath)) {
+    publicPath += '/';
   }
   // head chunk
-  const linkCodes = `<link rel="stylesheet" href="${basepath}react-combo@${version}.css">`
-  const metadata = JSON.stringify({
-    version,
-    webpackPublicPath: basepath,
-  });
+  const linkCodes = `<link rel="stylesheet" href="${publicPath}one-bag@${version}.css">`
+  const metadata = JSON.stringify({ version, webpackPublicPath: publicPath });
   const metadataCodes = `  <script> window['$__combo_config'] = ${metadata}; </script>`;
 
   // body chunk
-  const scriptCodes = `<script src="${basepath}react-combo@${version}.js"></script>`;
+  const scriptCodes = `<script src="${publicPath}one-bag@${version}.js"></script>`;
 
   return {
     headChunk: linkCodes + '\n' + metadataCodes,
@@ -39,8 +36,8 @@ const { config, version } = packageJson;
 function getBundleInfos() {
   return {
     cdn: config.cdn,
-    css: [`react-combo@${version}.css`],
-    js: [`react-combo@${version}.js`],
+    css: [`one-bag@${version}.css`],
+    js: [`one-bag@${version}.js`],
   }
 }
 

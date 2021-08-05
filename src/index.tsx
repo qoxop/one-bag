@@ -1,5 +1,4 @@
 
-import 'systemjs/dist/system.min.js';
 import { register } from './system.register';
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -8,14 +7,16 @@ import { Router } from 'react-router';
 import { renderRoutes } from 'react-router-config';
 import store, { mergeReducer } from './helpers/store';
 import { IRouteProps } from './helpers/types';
-import { moduleLoader } from './helpers/loader'
+import { moduleLoader } from './helpers/loader';
+import { createAtomClass } from './helpers/style';
 import { createHistory, router, IRouterConfig, getQuery, useQuery } from './helpers/route';
-import 'antd/dist/antd.less';
-import Botton from 'antd/es/button'
+import './assets/index.less';
+import './components';
+import './utils';
 
 interface IConfig {
   mounted?: string,
-  routes:IRouteProps[],
+  routes?:IRouteProps[],
   routerConfig?: IRouterConfig
   AppContainer: React.FunctionComponent,
 }
@@ -30,9 +31,9 @@ const bootstrap = (config: IConfig):void => {
   ReactDOM.render(
     <Provider store={store}>
         <AppContainer>
-          <Router history={createHistory(routerConfig)}>
+          {!!routes?.length && <Router history={createHistory(routerConfig)}>
             {renderRoutes(routes)}
-          </Router>
+          </Router>}
         </AppContainer>
     </Provider>,
     document.getElementById(mounted),
@@ -41,7 +42,7 @@ const bootstrap = (config: IConfig):void => {
 
 // 注册模块
 register.obj({
-  '@qoxop/react-combo': {
+  'one-bag': {
     default: bootstrap,
     store,
     router,
@@ -49,17 +50,19 @@ register.obj({
     useQuery,
     mergeReducer,
     moduleLoader,
+    createAtomClass,
     register,
   }
 });
 
-export type {
+export {
   store,
   router,
   getQuery,
   useQuery,
   mergeReducer,
   moduleLoader,
+  createAtomClass,
   register
 }
 

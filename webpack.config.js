@@ -1,12 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
+const { version } = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
+const NpmImportPlugin = require("less-plugin-npm-import");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const SystemRegisterLoader = require('./loader/system-register-loader');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
-const NpmImportPlugin = require("less-plugin-npm-import")
-const { version } = require('../package.json');
+const SystemRegisterLoader = require('./helper/loaders/system-register-loader');
 
 const { ModuleFederationPlugin } = webpack.container;
 
@@ -22,25 +22,28 @@ const SystemOptions = {
     'history',
     'qs'
   ],
-  ignores: ['systemjs']
+  ignores: ['systemjs', 'antd', 'whatwg-fetch']
 }
 
 module.exports = {
   mode: 'production',
   target: 'web',
   entry: {
-    'react-combo': path.resolve(__dirname, '../src/index.tsx'),
+    'one-bag': path.resolve(__dirname, './src/index.tsx'),
   },
   output: {
     filename: `[name]@${version}.js`,
     chunkFilename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, './dist'),
     clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
     modules: ["node_modules"],
     symlinks: false,
+    alias: {
+      'src': path.resolve(__dirname, './src'),
+    }
   },
   module: {
     noParse: function (content) {
@@ -58,7 +61,7 @@ module.exports = {
         }
       },
       {
-        resource: path.resolve(__dirname, '../src/system.register.ts'),
+        resource: path.resolve(__dirname, './src/system.register.ts'),
         use: {
           loader: SystemRegisterLoader.loaderPath,
           options: SystemOptions,
@@ -68,7 +71,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
@@ -122,7 +125,7 @@ module.exports = {
       ignoreOrder: true
     }),
     new ModuleFederationPlugin({
-      name: "react-combo",
+      name: "one-bag",
       shared: SystemRegisterLoader.parseDeps(SystemOptions).asyncDeps,
     }),
   ],
@@ -137,13 +140,29 @@ module.exports = {
           safari10: true,
         },
       }),
-    ]
+    ],
+    splitChunks: {
+      chunks: 'async',
+      minSize: 20000,
+      minChunks: 1,
+      maxAsyncRequests: 30,
+      maxInitialRequests: 30,
+      enforceSizeThreshold: 50000,
+      cacheGroups: {
+        defaultVendors: false,
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    }
   },
-  cache: {
-    type: 'filesystem',
-    allowCollectingMemory: true,
-    buildDependencies: {
-      config: [__filename, path.resolve(__dirname, '../package.json')],
-    },
-  },
+  // cache: {
+  //   type: 'filesystem',
+  //   allowCollectingMemory: true,
+  //   buildDependencies: {
+  //     config: [__filename, path.resolve(__dirname, './package.json')],
+  //   },
+  // },
 }
