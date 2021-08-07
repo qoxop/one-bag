@@ -12,9 +12,9 @@
     "postpublish": "yarn run sync_cdn"
   },
   "config": {
-    "devHost": "http://files.codcats.com/one-bag",
+    "devHost": "http://localhost",
     "devPort": "3000",
-    "cdn": "http://localhost:3000/"
+    "cdn": "http://files.codcats.com/one-bag/"
   },
   "files": [
     "dist",

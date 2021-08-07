@@ -14,7 +14,8 @@ const compile = new Promise(((resolve, reject) => {
 
 compile.then(() => {
   console.log('\n\n构建成功～～～\n\n');
-}).catch(() => {
+}).catch((err) => {
+  console.error(err)
   console.log('\n\n构建失败～～～\n\n');
 });
 

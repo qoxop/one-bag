@@ -7,11 +7,8 @@ const webpackConfig = require('./webpack.config');
 module.exports = merge(webpackConfig, {
   mode: 'development',
   devtool: 'inline-source-map',
-  output: {
-    path: path.resolve(__dirname, './.website')
-  },
   devServer: {
-    contentBase: path.resolve(__dirname, './.website'),
+    contentBase: path.resolve(__dirname, './dist'),
     port: config.devPort,
     host: '0.0.0.0',
     writeToDisk: true,

@@ -1,12 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
-const { version } = require('./package.json');
+const { version, config } = require('./package.json');
 const TerserPlugin = require('terser-webpack-plugin');
 const NpmImportPlugin = require("less-plugin-npm-import");
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const SystemRegisterLoader = require('./helper/loaders/system-register-loader');
+const SummaryPlugin = require('./helper/plugins/webpack-summary.plugin');
 
 const { ModuleFederationPlugin } = webpack.container;
 
@@ -128,6 +129,7 @@ module.exports = {
       name: "one-bag",
       shared: SystemRegisterLoader.parseDeps(SystemOptions).asyncDeps,
     }),
+    new SummaryPlugin({cdn: config.cdn, version })
   ],
   optimization: {
     minimize: true,
