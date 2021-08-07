@@ -1,5 +1,7 @@
-const git = require('./git');
+const path = require('path');
+const fs = require('fs');
 const packageJson = require('../package.json');
+const { ncp } = require('ncp');
 
 const { config, version } = packageJson;
 
@@ -27,6 +29,22 @@ const { config, version } = packageJson;
     headChunk: linkCodes + '\n' + metadataCodes,
     bodyChunk: scriptCodes
   }
+}
+
+/**
+ * 拷贝 bundle 文件
+ * @param {*} destination 
+ */
+function copyBundle(destination = '', callback = console.log) {
+  destination = destination || path.resolve(process.cwd(), './dist/one-bag');
+  if (!fs.existsSync(destination)) {
+    try {
+      fs.mkdirSync(destination, { recursive: true })
+    } catch (error) {
+      callback(error);
+    }
+  }
+  ncp(path.resolve(__dirname, '../dist'), destination, callback);
 }
 
 /**
@@ -64,5 +82,5 @@ module.exports = {
   getHtmlChunk,
   countPeerDeps,
   getBundleInfos,
-  git,
+  copyBundle,
 }

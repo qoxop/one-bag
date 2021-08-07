@@ -16,7 +16,7 @@ import './utils';
 
 interface IConfig {
   mounted?: string,
-  routes?:IRouteProps[],
+  routes:IRouteProps[],
   routerConfig?: IRouterConfig
   AppContainer: React.FunctionComponent,
 }
@@ -31,9 +31,9 @@ const bootstrap = (config: IConfig):void => {
   ReactDOM.render(
     <Provider store={store}>
         <AppContainer>
-          {!!routes?.length && <Router history={createHistory(routerConfig)}>
+          <Router history={createHistory(routerConfig)}>
             {renderRoutes(routes)}
-          </Router>}
+          </Router>
         </AppContainer>
     </Provider>,
     document.getElementById(mounted),
